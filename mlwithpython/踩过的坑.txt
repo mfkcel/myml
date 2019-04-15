@@ -1,0 +1,4 @@
+1.在安装好anoconda后，在idea中导入显示找不到包
+   重启后又可以使用了, fuck!
+
+2.在idea下安装好python插件后，就可以创建python moudle了,可以指定要使用的编译器
