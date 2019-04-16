@@ -3,7 +3,7 @@ import numpy.linalg
 import numpy.matlib
 
 '''
-NumPy 提供了线性代数函数库 linalg，该库包含了线性代数所需的所有功能，可以看看下面的说明：
+NumPy 提供了线性代数函数库 linalg，该库包含了线性代数所需的所有功能，
 
     函数	描述
     dot	两个数组的点积，即元素对应相乘。
