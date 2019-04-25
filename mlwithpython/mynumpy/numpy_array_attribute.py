@@ -27,8 +27,18 @@ import numpy as np
 
 if __name__ == '__main__':
     arr = np.array([[1, 2, 3], [2, 3, 4]])
+
+    #维度数量
     print(arr.ndim)
+
+    #数组的元素个数总数以元组的形式给出(n, m)
     print(arr.shape)
+
+    # 数组的元素个数对象类型
     print(arr.dtype)
+
+    # 数组的元素个数总数
     print(arr.size)
+
+    # 数组中每个元素的大小(以字节为单位)
     print(arr.itemsize)

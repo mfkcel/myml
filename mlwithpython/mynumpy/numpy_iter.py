@@ -22,8 +22,8 @@ if __name__ == '__main__':
 
     '''
       控制遍历顺序
-      for x in np.nditer(a, order='F'):Fortran order，即是列序优先；
-      for x in np.nditer(a.T, order='C'):C order，即是行序优先；
+      for x in np.nditer(a, order='F'):Fortran order，列序优先；
+      for x in np.nditer(a.T, order='C'):C order，行序优先；
     '''
     arr1 = np.arange(0, 60, 5).reshape(3, 4)
     print('原始数组:\n')

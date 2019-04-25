@@ -4,7 +4,7 @@ import numpy.matlib
 '''
 NumPy 中包含了一个矩阵库 numpy.matlib，该模块中的函数返回的是一个矩阵，而不是 ndarray 对象。
 
-一个 的矩阵是一个由行（row）列（column）元素排列成的矩形阵列。
+一个矩阵是一个由行（row）列（column）元素排列成的矩形阵列。
 
 矩阵里的元素可以是数字、符号或数学式。
 '''
