@@ -11,6 +11,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 # 数据预处理
 df_train = pd.read_csv('f:/tempfile/train_set.csv')
 df_test = pd.read_csv('f:/tempfile/test_set.csv')
+# 指定特征列
 df_train.drop(columns=['article', 'id'], inplace=True)
 df_test.drop(columns=['article'], inplace=True)
 
