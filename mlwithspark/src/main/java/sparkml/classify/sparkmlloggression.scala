@@ -1,4 +1,4 @@
-package sparkml.regression
+package sparkml.classify
 
 import org.apache.spark.SparkConf
 import org.apache.spark.ml.classification.LogisticRegression

@@ -11,7 +11,7 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
   * 使用贝叶斯模型进行分类
   */
 
-object ClassificationMLScalaChinese {
+object ClassificationNaviBayes {
 
   case class RawDataRecord(category:Int, text:String)
 
@@ -141,7 +141,6 @@ object ClassificationMLScalaChinese {
       .setOutputCol("indexedLabel")
       .fit(data) // 这里一定要用fit,否则后面的IndexTostring无法调用labeldexer的labels
 
-
     val tokenizer = new Tokenizer()
       .setInputCol("text")
       .setOutputCol("words")
@@ -152,8 +151,6 @@ object ClassificationMLScalaChinese {
       .setOutputCol("features")
 
     val pipeline = new Pipeline().setStages(Array(labelIndexer, tokenizer, hashingTF))
-
-
     val pipelineModel = pipeline.fit(data)
     val td = pipelineModel.transform(data)
 
@@ -172,10 +169,10 @@ object ClassificationMLScalaChinese {
     val predictions = classicalModel.transform(td)
     val predictAccuracy = evaluator.evaluate(predictions)
     predictions.show(1000)
-    println("accuracy:" + predictAccuracy) // accuracy:0.25
+    println("accuracy:" + predictAccuracy) // accuracy:0.93
 
 
-    // 不能进行批量预测
+    // 不能进行批量预测，刚开始步骤搞错流程了，所以运行结果有问题
 //    testdata.createOrReplaceTempView("_testdata")
 //    val testdata2 = spark.sql("select count(label) from _testdata")
 //    var labelList = Nil

@@ -1,5 +1,22 @@
 ﻿sparkml 没有提供分词工具
 
+ansj 是中科院ictclas的java实现
+参考手册: http://nlpchina.github.io/ansj_seg/
+
+word分词器
+word分词是一个Java实现的分布式的中文分词组件，提供了多种基于词典的分词算法，并利用ngram模型来消除
+歧义。能准确识别英文、数字，以及日期、时间等数量词，能识别人名、地名、组织机构名等未登录词。能通过
+自定义配置文件来改变组件行为，能自定义用户词库、自动检测词库变化、支持大规模分布式环境，能灵活指定
+多种分词算法，能使用refine功能灵活控制分词结果，还能使用词性标注、同义标注、反义标注、拼音标注等功
+能。同时还无缝和Lucene、Solr、ElasticSearch、Luke集成。注意：word1.3需要JDK1.8
+
+其他的参考这个
+https://www.cnblogs.com/Sun-godless/p/5629046.html
+
+相应分词器的排名
+https://my.oschina.net/apdplat/blog/308391
+
+
 1.了解应用领域的相关知识
 2.创建目标数据集:选择数据
 3.数据清理和预处理:(这个可能要占全过程60%的工作量)

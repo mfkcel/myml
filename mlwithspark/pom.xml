@@ -9,12 +9,6 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
-<<<<<<< HEAD
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.11</artifactId>
-            <version>2.1.0</version>
-        </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -26,12 +20,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.40</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_2.11</artifactId>
-            <version>2.1.0</version>
         </dependency>
 
         <dependency>
@@ -67,18 +55,6 @@
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-mllib_2.11</artifactId>
-            <version>2.1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-=======
-        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-mllib -->
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-mllib_2.11</artifactId>
             <version>2.1.1</version>
         </dependency>
 
@@ -94,8 +70,34 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_2.11</artifactId>
             <version>2.1.1</version>
->>>>>>> origin/master
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.ansj/ansj_seg -->
+        <!-- 用新版本，老版本下载不下来 -->
+        <dependency>
+            <groupId>org.ansj</groupId>
+            <artifactId>ansj_seg</artifactId>
+            <version>5.1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apdplat/word -->
+        <dependency>
+            <groupId>org.apdplat</groupId>
+            <artifactId>word</artifactId>
+            <version>1.3</version>
+        </dependency>
+
 
     </dependencies>
 </project>
