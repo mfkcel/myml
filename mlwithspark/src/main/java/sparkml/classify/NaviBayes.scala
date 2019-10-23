@@ -11,7 +11,7 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
   * 使用贝叶斯模型进行分类
   */
 
-object ClassificationNaviBayes {
+object NaviBayes {
 
   case class RawDataRecord(category:Int, text:String)
 
@@ -49,22 +49,6 @@ object ClassificationNaviBayes {
 
       list.toIterator
     })
-//      .groupByKey()
-//      .mapPartitions(iter => {
-//        var list:List[(String, String)] = Nil
-//        for(category <- iter) {
-//          val key = category._1
-//          val sb = new StringBuffer()
-//          for(v <- category._2) {
-//            sb.append(v)
-//            sb.append(" ")
-//          }
-//          sb.deleteCharAt(sb.length() - 1)
-//
-//          list = (key, sb.toString) :: list
-//        }
-//        list.toIterator
-//      })
 
     import spark.implicits._
     docsRdd.toDF("label", "text")
@@ -111,7 +95,24 @@ object ClassificationNaviBayes {
     * @return
     */
   def predict(df:DataFrame, pm: PipelineModel) = {
-    pm.transform(df)
+
+    // 进入计算的数据一定要是向量
+    // 将句子切分成单词，分词
+    val tokenizer = new Tokenizer()
+      .setInputCol("text")
+      .setOutputCol("words")
+
+    //计算hashingtf,因为语料已经是关键词了，这里不再进行tf-idf的计算
+    // 向量化处理
+    val hashingTF = new HashingTF()
+      .setInputCol(tokenizer.getOutputCol)
+      .setOutputCol("features")
+
+    val pipeline = new Pipeline().setStages(Array(tokenizer, hashingTF))
+    val pipelineModel = pipeline.fit(df)
+    val td = pipelineModel.transform(df)
+
+    pm.transform(td)
   }
 
 
@@ -133,14 +134,16 @@ object ClassificationNaviBayes {
     // 加载数据,映射为<DataFrame[RawDataRecord[category, words]]>
     // 将数据分为训练数据与，测试数据,应该在对数据作处理前向量化处理，这样方便后面处理
     // 避免出现一些重复的步骤
-    // 如果数据不是向量化的数据，一定要先进行向量化处理！！！！！！这个很重要
+    // 如果数据不是向量化的数据，一定要先进行向量化处理！！！！！！这个很重要，计算机只认识0,1
 
     val data = loadFile(spark, dataPath)
+    // 将标签索引化，训练完成后使用IndexToString转换回原标签
     val labelIndexer = new StringIndexer()
       .setInputCol("label")
       .setOutputCol("indexedLabel")
       .fit(data) // 这里一定要用fit,否则后面的IndexTostring无法调用labeldexer的labels
 
+    // 将句子切分成单词，分词
     val tokenizer = new Tokenizer()
       .setInputCol("text")
       .setOutputCol("words")
@@ -150,12 +153,15 @@ object ClassificationNaviBayes {
       .setInputCol(tokenizer.getOutputCol)
       .setOutputCol("features")
 
+    // 数据预处理
     val pipeline = new Pipeline().setStages(Array(labelIndexer, tokenizer, hashingTF))
     val pipelineModel = pipeline.fit(data)
     val td = pipelineModel.transform(data)
 
+    // 训练数据与测试数据的切分
     val Array(traindata, testdata) = td.randomSplit(Array(0.7,0.3), 1L)
 
+    // 训练模型
     val classicalModel = trainModel(traindata, labelIndexer)
 //    classicalModel.save("file:///D:\\myfile\\iwork\\model\\classify")
 
@@ -168,8 +174,11 @@ object ClassificationNaviBayes {
 
     val predictions = classicalModel.transform(td)
     val predictAccuracy = evaluator.evaluate(predictions)
-    predictions.show(1000)
+    predictions.show(20)
     println("accuracy:" + predictAccuracy) // accuracy:0.93
+
+    val pd = processData(spark, "腾迅 股票 涨停")
+    println(predict(pd, classicalModel).show())
 
 
     // 不能进行批量预测，刚开始步骤搞错流程了，所以运行结果有问题

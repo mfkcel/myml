@@ -8,10 +8,9 @@ import org.apache.spark.ml.feature.{IndexToString, StringIndexer, VectorIndexer}
 import org.apache.spark.sql.SparkSession
 
 /**
-  * 决策树的基本使用
+  * 决策树的基本使用,练习1
   */
-@Deprecated
-object sparkmldecisiontreeclassifer {
+object decisiontree_exercise1 {
   def main(args:Array[String]) = {
     val conf = new SparkConf().setMaster("local[4]").setAppName("decisiontreeclassifer")
     val spark = SparkSession.builder().config(conf).enableHiveSupport().getOrCreate()
@@ -26,6 +25,17 @@ object sparkmldecisiontreeclassifer {
       .fit(data)
 
     // 自动识别分类的特征，并对它们进行索引
+    // VectorIndexer解决向量数据集中的类别特征索引。它可以自动识别哪些特征是类别型的，并且将原始值转换为类别索引。它的处理流程如下：
+    //
+    //​ 1.获得一个向量类型的输入以及maxCategories参数。
+    //
+    //​ 2.基于不同特征值的数量来识别哪些特征需要被类别化，其中最多maxCategories个特征需要被类别化。
+    //
+    //​ 3.对于每一个类别特征计算0-based（从0开始）类别索引。
+    //
+    //​ 4.对类别特征进行索引然后将原始特征值转换为索引。
+    //
+    //       索引后的类别特征可以帮助决策树等算法恰当的处理类别型特征，并得到较好结果。
     val featureIndexer = new VectorIndexer()
       .setInputCol("features")
       .setOutputCol("indexedFeatures")
