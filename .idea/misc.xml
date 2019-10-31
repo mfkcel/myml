@@ -4,6 +4,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/mlwithspark/pom.xml" />
+        <option value="$PROJECT_DIR$/mynlp/pom.xml" />
       </list>
     </option>
   </component>

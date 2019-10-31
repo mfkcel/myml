@@ -7,12 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="mlwithspark" />
+        <module name="mynlp" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="deeplearning" target="1.5" />
       <module name="mallet" target="1.6" />
       <module name="mlwithspark" target="1.5" />
+      <module name="mynlp" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
