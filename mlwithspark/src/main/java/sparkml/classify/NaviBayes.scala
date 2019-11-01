@@ -172,6 +172,8 @@ object NaviBayes {
       .setLabelCol("indexedLabel")
       .setPredictionCol("prediction")
 
+
+
     val predictions = classicalModel.transform(td)
     val predictAccuracy = evaluator.evaluate(predictions)
     predictions.show(20)
