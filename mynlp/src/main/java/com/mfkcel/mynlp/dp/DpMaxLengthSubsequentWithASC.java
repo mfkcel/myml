@@ -1,5 +1,7 @@
 package com.mfkcel.mynlp.dp;
 
+import java.util.Arrays;
+
 /**
  * @author mc1381288@163.com
  * @date 2019/11/1 15:24
@@ -48,7 +50,36 @@ package com.mfkcel.mynlp.dp;
  *
  */
 public class DpMaxLengthSubsequentWithASC {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, -8, 12, 6, 5, 7, 9, 10, -7, -6, -5, -4 };
+        System.out.println(solveDp(arr));
+    }
+
+    /**
+     * 以第arr[i]为最后一个元素的子序列是前面的最大子序列+1
+     * @param arr
+     * @return
+     */
     public static int solveDp(int[] arr) {
-        return 0;
+        int[] subSeqs = new int[arr.length];
+        int max = 0;
+
+        for(int i = 0; i < arr.length; i++) {
+            subSeqs[i] = 1;
+            max = 0;
+            for(int j = 0; j < i; j++) {
+                if(arr[j] < arr[i] && arr[j] > arr[max]) {
+                    max = j;
+                }
+                subSeqs[i] = subSeqs[max] + 1;
+            }
+        }
+
+        max = Integer.MIN_VALUE;
+        for(int i = 0; i < subSeqs.length; i++) {
+            if(max < subSeqs[i])
+                max = subSeqs[i];
+        }
+        return max;
     }
 }
