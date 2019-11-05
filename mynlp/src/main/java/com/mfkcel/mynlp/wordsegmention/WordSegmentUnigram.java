@@ -1,5 +1,7 @@
 package com.mfkcel.mynlp.wordsegmention;
 
+import java.util.Map;
+
 /**
  * create by mfkcel on 2019/11/2 22:40
  *
@@ -12,7 +14,18 @@ package com.mfkcel.mynlp.wordsegmention;
  *
  * 分词首先要有基本词典
  * 这个是通过统计可以计算出每个词组的频率--基本词典,一般是通过人工统计
+ *
+ * 我爱我的祖国
+ *    我，爱，我，的，祖，国
+ *    我，爱，我，的，祖国
+ *    我，爱，我的，祖国
+ *    我，爱我，的，祖国
+ *    我爱我，的，祖国
+ *    我爱我的，祖国
  */
 public class WordSegmentUnigram {
+    public static Map<String, String[]> enumSegment(String content) {
 
+        return null;
+    }
 }
