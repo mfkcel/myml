@@ -1,5 +1,8 @@
 package com.mfkcel.mynlp.wordsegmention;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,8 +33,17 @@ import java.util.Map;
  *
  */
 public class WordSegmentUnigram {
+    public static void main(String[] args) {
+
+    }
+
     public static Map<String, String[]> enumSegment(String content) {
+        HashSet<String> wordSet = new HashSet<String>();
+        HashMap<Integer, List<String>> wordMap = new HashMap<>();
+
 
         return null;
     }
+
+
 }
