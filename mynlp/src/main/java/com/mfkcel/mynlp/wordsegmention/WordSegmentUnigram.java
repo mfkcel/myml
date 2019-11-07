@@ -39,7 +39,7 @@ public class WordSegmentUnigram {
 
     public static Map<String, String[]> enumSegment(String content) {
         HashSet<String> wordSet = new HashSet<String>();
-        HashMap<Integer, List<String>> wordMap = new HashMap<>();
+        HashMap<Integer, List<String>> wordMap = new HashMap<Integer, List<String>>();
 
 
         return null;
