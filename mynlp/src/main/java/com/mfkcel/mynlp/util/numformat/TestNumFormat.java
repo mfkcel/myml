@@ -1,6 +1,6 @@
 package com.mfkcel.mynlp.util.numformat;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 /**
  * @author mc1381288@163.com
@@ -8,9 +8,9 @@ import org.junit.Test;
  */
 public class TestNumFormat {
     // 将字符串表示的数字转换为long
-    @Test
-    public void test1() {
-        String numStr = "00237692";
-        System.out.println(Long.parseLong(numStr));
-    }
+//    @Test
+//    public void test1() {
+//        String numStr = "00237692";
+//        System.out.println(Long.parseLong(numStr));
+//    }
 }

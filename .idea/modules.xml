@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/mlwithpython/mlwithpython.iml" filepath="$PROJECT_DIR$/mlwithpython/mlwithpython.iml" />
       <module fileurl="file://$PROJECT_DIR$/mlwithspark/mlwithspark.iml" filepath="$PROJECT_DIR$/mlwithspark/mlwithspark.iml" />
       <module fileurl="file://$PROJECT_DIR$/myml.iml" filepath="$PROJECT_DIR$/myml.iml" />
       <module fileurl="file://$PROJECT_DIR$/mynlp/mynlp.iml" filepath="$PROJECT_DIR$/mynlp/mynlp.iml" />

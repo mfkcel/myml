@@ -1,11 +1,11 @@
 package com.mfkcel.mynlp.util.easyexcel;
 
-
-import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.ExcelReader;
-import com.alibaba.excel.context.AnalysisContext;
-import com.alibaba.excel.event.AnalysisEventListener;
-import com.alibaba.excel.read.metadata.ReadSheet;
+//
+//import com.alibaba.excel.EasyExcel;
+//import com.alibaba.excel.ExcelReader;
+//import com.alibaba.excel.context.AnalysisContext;
+//import com.alibaba.excel.event.AnalysisEventListener;
+//import com.alibaba.excel.read.metadata.ReadSheet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +27,11 @@ public class TestEasyexcel {
 //        EasyExcel.read(fileName, DemoData.class, new DemoDataListener()).sheet().doRead();
 
         // 写法2
-        ExcelReader excelReader = EasyExcel.read(fileName, DemoData.class, new DemoDataListener()).build();
-        ReadSheet readSheet = EasyExcel.readSheet(0).build();
-        excelReader.read(readSheet);
-        //使用后，一定要记得关闭,读的时候会创建临时文件，到时磁盘会崩溃的
-        excelReader.finish();
+//        ExcelReader excelReader = EasyExcel.read(fileName, DemoData.class, new DemoDataListener()).build();
+//        ReadSheet readSheet = EasyExcel.readSheet(0).build();
+//        excelReader.read(readSheet);
+//        //使用后，一定要记得关闭,读的时候会创建临时文件，到时磁盘会崩溃的
+//        excelReader.finish();
     }
 }
 

@@ -1,9 +1,7 @@
 package com.mfkcel.mynlp.wordsegmention;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 /**
  * create by mfkcel on 2019/11/2 22:40
@@ -33,16 +31,105 @@ import java.util.Map;
  *
  */
 public class WordSegmentUnigram {
-    public static void main(String[] args) {
+    private static HashMap<String, Double> dictMap = new HashMap<>();
 
+    // 词典中最长的词语
+    private static final int maxWordLength = 16;
+    static {
+        InputStream in = null;
+        try {
+            in = WordSegmentUnigram.class.getClassLoader().getResourceAsStream("chinese_word_freq");
+            BufferedReader buffR = new BufferedReader(new InputStreamReader(in));
+            String line = null;
+            while((line = buffR.readLine()) != null) {
+                String[] words = line.split("\t");
+                dictMap.put(words[0], Double.parseDouble(words[1]));
+            }
+        } catch (Exception e) {
+            System.out.println("词典加载失败!!!");
+        } finally {
+            if(in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+
+                }
+            }
+        }
+    }
+    public static void main(String[] args) {
+        String content = "我喜欢你";
+        System.out.println(enumSegment(content));
     }
 
-    public static Map<String, String[]> enumSegment(String content) {
-        HashSet<String> wordSet = new HashSet<String>();
-        HashMap<Integer, List<String>> wordMap = new HashMap<Integer, List<String>>();
-
+    /**
+     * 先求所有可能的子串，再用子串去组合原字符串，能产生多少组合就有多少的分词方法
+     * @param content
+     * @return
+     */
+    public static Map<Integer, List<String>> enumSegment2(String content) {
 
         return null;
+    }
+
+    // 返回所有可能的子串
+    public static List<String> allSubString(String str) {
+        return null;
+    }
+
+    /**
+     * 使用list中的子字符串能产生多少种content的组合
+     * @param content
+     * @param list
+     * @return
+     */
+    public static Map<Integer, List<String>> compose(String content, List<String> list) {
+        return null;
+    }
+
+    /**
+     * 下面的这个实现不能满足要求，因为若找到的字都组成词继续去找是否存在更大的词，这样在逻辑上也是行不通的
+     * 短词都没有，长词就更可能没有，反而会忽略掉部分短词
+     * @param content
+     * @return
+     */
+    public static Map<Integer, List<String>> enumSegment(String content) {
+
+        // 已经产生的分词
+        HashSet<String> wordSet = new HashSet<String>();
+        // 存储每一次的分词的序列,
+        HashMap<Integer, List<String>> wordMap = new HashMap<Integer, List<String>>();
+        // 将输入的内容拆分成单句,达不到实际效果，中文应该如何将段落划分成一句一句的
+//        String[] sentences = content.split("。|| ，|| ！|| ？");
+
+
+        for(int i = 1; i <= maxWordLength; i++) {
+            // i表示该次取次的初始长度
+            int start = 0; // 词语从哪里开始截取,也表示已经截取的部分
+            List<String> wordList = new ArrayList<>();
+            String word = null;
+            for(int j = 0; j <= maxWordLength && start < content.length(); ) {
+                // j表示每次增加的词语长度
+                int end = start + j + 1;
+                if(end > content.length()) break;
+                word = content.substring(start, end);
+
+                if(dictMap.containsKey(word) && !wordSet.contains(word)) {
+                    start = end;
+                    wordSet.add(word);
+                    wordList.add(word);
+                } else {
+                    j++;
+                }
+
+            }
+
+            wordMap.put(i, wordList);
+        }
+
+
+
+        return wordMap;
     }
 
 
