@@ -57,10 +57,13 @@ public class WordSegmentUnigram {
             }
         }
     }
+
+
+
     public static void main(String[] args) {
-        String content = "我喜欢你";
-        System.out.println(enumSegment(content));
+        System.out.println(allSubString("因为总有词典没有收纳到的词"));
     }
+
 
     /**
      * 先求所有可能的子串，再用子串去组合原字符串，能产生多少组合就有多少的分词方法
@@ -68,24 +71,58 @@ public class WordSegmentUnigram {
      * @return
      */
     public static Map<Integer, List<String>> enumSegment2(String content) {
-
-        return null;
+        Map<String, List<String>> subStrMap = allSubString(content);
+        Map<Integer, List<String>> compose = compose(content, subStrMap);
+        return compose;
     }
 
-    // 返回所有可能的子串
-    public static List<String> allSubString(String str) {
-        return null;
+
+    /**
+     * 返回字符串所有可能的子串
+     * abcde
+     *      a, ab, abc, abcd, abcde
+     *      b, bc, bcd, bcde
+     *      c, cd, cde
+     *      d, de
+     *      e
+     * @param str
+     * @return
+     */
+    public static Map<String, List<String>> allSubString(String str) {
+        Map<String, List<String>> subStrMap = new HashMap<>();
+        for(int i = 0; i < str.length(); i++) {
+            List<String> list = new ArrayList<>();
+            for(int j = i; j < str.length(); j++) {
+                // String的求子串是左闭右开,因此endIndex可以等于字符串的长度
+                String subStr = str.substring(i, j + 1);
+                if(subStr.length() > maxWordLength) break; // 超过词典中最长的词的长度
+
+                //如果使用词典来判断该子字符串是否是一个已在词典中的词，那么就有可能产生分词缺失，因为总有词典没有收纳到的词
+                //分词过程中如何处理词典中没有的词
+                list.add(subStr);
+            }
+
+            subStrMap.put(str.charAt(i) + "", list);
+        }
+        return subStrMap;
     }
+
+
 
     /**
      * 使用list中的子字符串能产生多少种content的组合
+     * 需要kmp算法进行字符串匹配
      * @param content
-     * @param list
+     * @param subStrMap
      * @return
      */
-    public static Map<Integer, List<String>> compose(String content, List<String> list) {
+    public static Map<Integer, List<String>> compose(String content, Map<String, List<String>> subStrMap) {
+        StringBuilder builder = new StringBuilder();
+
         return null;
     }
+
+
 
     /**
      * 下面的这个实现不能满足要求，因为若找到的字都组成词继续去找是否存在更大的词，这样在逻辑上也是行不通的
