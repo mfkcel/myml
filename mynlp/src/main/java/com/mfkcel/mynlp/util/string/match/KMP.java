@@ -1,4 +1,4 @@
-package com.mfkcel.mynlp.util.string.kmp;
+package com.mfkcel.mynlp.util.string.match;
 
 /**
  * @author mc1381288@163.com

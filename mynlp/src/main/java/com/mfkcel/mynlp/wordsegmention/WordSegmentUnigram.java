@@ -89,7 +89,7 @@ public class WordSegmentUnigram {
      * @return
      */
     public static Map<String, List<String>> allSubString(String str) {
-        Map<String, List<String>> subStrMap = new HashMap<>();
+        Map<String, List<String>> subStrMap = new LinkedHashMap<>();
         for(int i = 0; i < str.length(); i++) {
             List<String> list = new ArrayList<>();
             for(int j = i; j < str.length(); j++) {
@@ -135,7 +135,7 @@ public class WordSegmentUnigram {
         // 已经产生的分词
         HashSet<String> wordSet = new HashSet<String>();
         // 存储每一次的分词的序列,
-        HashMap<Integer, List<String>> wordMap = new HashMap<Integer, List<String>>();
+        HashMap<Integer, List<String>> wordMap = new LinkedHashMap<>();
         // 将输入的内容拆分成单句,达不到实际效果，中文应该如何将段落划分成一句一句的
 //        String[] sentences = content.split("。|| ，|| ！|| ？");
 
