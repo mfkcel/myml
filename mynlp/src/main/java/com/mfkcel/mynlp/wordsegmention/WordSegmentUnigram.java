@@ -1,6 +1,7 @@
 package com.mfkcel.mynlp.wordsegmention;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -60,8 +61,19 @@ public class WordSegmentUnigram {
 
 
 
+
+
+
     public static void main(String[] args) {
-        System.out.println(allSubString("因为总有词典没有收纳到的词"));
+        BigInteger result = getCompose(33, 66);
+        System.out.println(result);
+        System.out.println(result.longValue());
+
+        System.out.println(getRank(15, 30));
+
+        System.out.println(getRank(15, 15));
+
+
     }
 
 
@@ -74,6 +86,72 @@ public class WordSegmentUnigram {
         Map<String, List<String>> subStrMap = allSubString(content);
         Map<Integer, List<String>> compose = compose(content, subStrMap);
         return compose;
+    }
+
+    /**
+     * 每次都产生一个分词结果
+     * 5
+     *  我爱，我，的，祖，国
+     *  我，爱我，的，祖，国
+     *  我，爱，我的，祖，国
+     *  我，爱，我，的祖，国
+     *  我，爱，我，的，祖国
+     *
+     * 4
+     *  我，爱我，的，祖国
+     *  我爱，我，的，祖国
+     *  我，爱，我的，祖国
+     *  我爱，我的，祖，国
+     *  我爱，我，的祖，国
+     *  我，爱我，的祖，国
+     *  我爱我，的，祖，国
+     *  我，爱，我的祖，国
+     *  我，爱，我，的祖国
+     *  我，爱我的，祖，国
+     *
+     * @param content
+     * @return
+     */
+    public static Map<Integer, List<String>> enumSegment3(String content) {
+        Map<Integer, List<String>> wordMap = new HashMap<>();
+        int len = content.length();
+        for(int i = content.length(); i > 1; i--) {
+            // 能产生的词语的最长长度
+            int maxWordLen = len - i + 1;
+            // 计算在确定最长词语的和长度时计算有多少种分词结果
+            // 长度为n的句子，要分成i个单词，那么相当于是要在n-1个位置选i-1个位置放置分隔符
+            long total = getCompose(i - 1, len - 1).longValue();
+
+            for(long j = 0; j < total; j++) {
+                // 存储本次分词的结果
+                List<String> list = new ArrayList<>(i);
+            }
+
+        }
+        return null;
+    }
+
+    /**
+     * 整数能求的组合范围较小
+     *
+     */
+    private static BigInteger getCompose(int m, int n) {
+        //因为在使用中结果需要转型为long,因此只能计算到C66
+        if(n > 66) return BigInteger.valueOf(0);
+        return getRank(m, n).divide(getRank(m, m));
+    }
+
+    private static BigInteger getRank(int m, int n) {
+
+        BigInteger big2 = new BigInteger(n + "");
+        BigInteger big3 = new BigInteger(n + "");
+
+
+        long result = n;
+        for(int i = 1; i < m ; i++){
+            big3 = big3.multiply(big2.subtract(new BigInteger(i + "")));
+        }
+        return big3;
     }
 
 
@@ -111,7 +189,7 @@ public class WordSegmentUnigram {
 
     /**
      * 使用list中的子字符串能产生多少种content的组合
-     * 需要kmp算法进行字符串匹配
+     * 又重新去组合，这个复杂度感觉很高
      * @param content
      * @param subStrMap
      * @return
