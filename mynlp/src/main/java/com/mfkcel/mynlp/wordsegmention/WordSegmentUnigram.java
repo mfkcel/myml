@@ -125,6 +125,7 @@ public class WordSegmentUnigram {
             for(long j = 0; j < total; j++) {
                 // 存储本次分词的结果
                 List<String> list = new ArrayList<>(i);
+                // todo 枚举分词
             }
 
         }

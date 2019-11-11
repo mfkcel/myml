@@ -44,12 +44,9 @@ public class ComputeWordFreq {
             buffW.newLine();
             count2++;
         }
+
+        // 要记得刷新缓存
         buffW.flush();
-        System.out.println(wordMap.size());
-        System.out.println("end! " + count);
-        System.out.println(wordMap.entrySet().size());
-        System.out.println(maxWordLength);
-        System.out.println("count2 " + count2);
 
     }
 }
